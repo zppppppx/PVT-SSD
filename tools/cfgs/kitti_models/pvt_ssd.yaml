@@ -1,4 +1,4 @@
-CLASS_NAMES: ['Car']
+CLASS_NAMES: ['Car', 'Pedestrian', 'Cyclist']
 
 DATA_CONFIG: 
     _BASE_CONFIG_: cfgs/dataset_configs/kitti_dataset.yaml
@@ -148,7 +148,7 @@ MODEL:
           MIN_RADIUS: 2
           GT_EXTRA_WIDTH: [0.2, 0.2, 10.0]
           GT_CENTRAL_RADIUS: 10.0
-          SEED_CLS: foreground
+          SEED_CLS: center # foreground
           BOX_CODER: PointBinResidualCoder
           BOX_CODER_CONFIG: {
             'angle_bin_num': 12,
@@ -194,7 +194,7 @@ MODEL:
 
 
 OPTIMIZATION:
-    BATCH_SIZE_PER_GPU: 4
+    BATCH_SIZE_PER_GPU: 8
     NUM_EPOCHS: 80
 
     OPTIMIZER: adam_onecycle
