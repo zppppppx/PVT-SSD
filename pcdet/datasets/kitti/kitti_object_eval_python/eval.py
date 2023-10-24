@@ -676,7 +676,24 @@ def get_official_eval_result(gt_annos, dt_annos, current_classes, PR_detail_dict
             break
     mAPbbox, mAPbev, mAP3d, mAPaos, mAPbbox_R40, mAPbev_R40, mAP3d_R40, mAPaos_R40 = do_eval(
         gt_annos, dt_annos, current_classes, min_overlaps, compute_aos, PR_detail_dict=PR_detail_dict)
-
+    
+    AP_save_dir='../AP_files/'
+    with open(AP_save_dir+'mAPbbox.npy','wb') as f:
+        np.save(f, mAPbbox)
+    with open(AP_save_dir+'mAPbev.npy','wb') as f:
+        np.save(f, mAPbev)
+    with open(AP_save_dir+'mAP3d.npy','wb') as f:
+        np.save(f, mAP3d)
+    with open(AP_save_dir+'mAPaos.npy','wb') as f:
+        np.save(f, mAPaos)
+    with open(AP_save_dir+'mAPbbox_R40.npy','wb') as f:
+        np.save(f, mAPbbox_R40)
+    with open(AP_save_dir+'mAPbev_R40.npy','wb') as f:
+        np.save(f, mAPbev_R40)
+    with open(AP_save_dir+'mAP3d_R40.npy','wb') as f:
+        np.save(f, mAP3d_R40)
+    with open(AP_save_dir+'mAPaos_R40.npy','wb') as f:
+        np.save(f, mAPaos_R40)
     ret_dict = {}
     for j, curcls in enumerate(current_classes):
         # mAP threshold array: [num_minoverlap, metric, class]
