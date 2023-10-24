@@ -17,9 +17,9 @@ NGPUS=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
 EPOCH=epoch_30
 
 CFG_NAME=kitti_models/pvt_ssd
-TAG_NAME=default
+TAG_NAME=${1}
 
-CKPT=../data/ckpts/pvt_ssd.pth
+CKPT=${2}
 
 python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT test.py --launcher pytorch --cfg_file cfgs/$CFG_NAME.yaml --workers 2 --extra_tag $TAG_NAME --ckpt $CKPT
 

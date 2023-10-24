@@ -12,3 +12,5 @@ venv/
 output
 version.py
 .vscode
+
+!/data/ckpts/checkpoint_epoch_80.pth
