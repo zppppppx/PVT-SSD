@@ -20,7 +20,6 @@ mkdir -p ${AP_files_dir}
 
 rm ../data/kitti/training/velodyne
 ln -s ${DATA_SRC} ../data/kitti/training/velodyne
-ln -s /pcc-storage/KITTI/training/planes ../data/kitti/training/planes
 
 bash scripts/dist_train.sh ${NUM_GPU} ${LOG_PATH} \
     --cfg_file ${MODEL_CFG_PATH} \
