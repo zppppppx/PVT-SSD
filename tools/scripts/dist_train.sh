@@ -16,13 +16,13 @@ echo $PORT
 
 # export CUDA_VISIBLE_DEVICES=0,1,2,3
 
-NGPUS=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
-BATCH_SIZE=$((8*$NGPUS))
-EPOCH=epoch_30
+# NGPUS=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
+# BATCH_SIZE=$((8*$NGPUS))
+# EPOCH=epoch_30
 
-CFG_NAME=kitti_models/pvt_ssd
+# CFG_NAME=kitti_models/pvt_ssd
 # CFG_NAME=waymo_models/pvt_ssd
-TAG_NAME=default
+# TAG_NAME=default
 
 # python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch --cfg_file cfgs/$CFG_NAME.yaml --workers 2 --extra_tag $TAG_NAME --max_ckpt_save_num 20 --num_epochs_to_eval 20 --batch_size $BATCH_SIZE \
 #     > ${LOG_PATH} 2>&1
