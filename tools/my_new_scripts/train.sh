@@ -26,4 +26,4 @@ bash scripts/dist_train.sh ${NUM_GPU} ${LOG_PATH} \
     --epochs ${EPOCH} \
     --extra_tag ${EXTRA_TAG} \
     --num_epochs_to_eval 30 \
-    --batch_size ${batch_size} \
+    --batch_size ${batch_size}
