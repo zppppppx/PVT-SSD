@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 set -x
 NGPUS=$1
-LOG_PATH=$2
-PY_ARGS=${@:3}
+PY_ARGS=${@:2}
+
+echo "#######################################" $PY_ARGS
 
 while true
 do
@@ -14,20 +15,21 @@ do
 done
 echo $PORT
 
-# export CUDA_VISIBLE_DEVICES=0,1,2,3
+# export CUDA_VISIBLE_DEVICES=0
 
 # NGPUS=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
-# BATCH_SIZE=$((8*$NGPUS))
+# BATCH_SIZE=$((6*$NGPUS))
 # EPOCH=epoch_30
 
 # CFG_NAME=kitti_models/pvt_ssd
 # CFG_NAME=waymo_models/pvt_ssd
 # TAG_NAME=default
 
-# python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch --cfg_file cfgs/$CFG_NAME.yaml --workers 2 --extra_tag $TAG_NAME --max_ckpt_save_num 20 --num_epochs_to_eval 20 --batch_size $BATCH_SIZE \
-#     > ${LOG_PATH} 2>&1
+# python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch --cfg_file cfgs/waymo_models/pvt_ssd.yaml --workers 2 --max_ckpt_save_num 20 --num_epochs_to_eval 20 --batch_size $BATCH_SIZE
 
-python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --rdzv_endpoint=localhost:${PORT} train.py --launcher pytorch ${PY_ARGS} > ${LOG_PATH} 2>&1
+# python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --rdzv_endpoint=localhost:${PORT} train.py --launcher pytorch ${PY_ARGS} > ${LOG_PATH} 2>&1
+python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch ${PY_ARGS}
+
 
 # python3 train.py --cfg_file cfgs/$CFG_NAME.yaml --workers 2 --extra_tag $TAG_NAME --max_ckpt_save_num 20 --num_epochs_to_eval 20 --batch_size $BATCH_SIZE \
 #     > /home/user/PCcompression/train_pvt.log 2>&1
