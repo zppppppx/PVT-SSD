@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 set -x
 NGPUS=$1
-PY_ARGS=${@:2}
+LOG_PATH=$2
+PY_ARGS=${@:3}
 
 echo "#######################################" $PY_ARGS
 
@@ -28,7 +29,7 @@ echo $PORT
 # python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch --cfg_file cfgs/waymo_models/pvt_ssd.yaml --workers 2 --max_ckpt_save_num 20 --num_epochs_to_eval 20 --batch_size $BATCH_SIZE
 
 # python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --rdzv_endpoint=localhost:${PORT} train.py --launcher pytorch ${PY_ARGS} > ${LOG_PATH} 2>&1
-python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch ${PY_ARGS}
+python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} --master_port $PORT train.py --launcher pytorch ${PY_ARGS} > ${LOG_PATH} 2>&1
 
 
 # python3 train.py --cfg_file cfgs/$CFG_NAME.yaml --workers 2 --extra_tag $TAG_NAME --max_ckpt_save_num 20 --num_epochs_to_eval 20 --batch_size $BATCH_SIZE \
