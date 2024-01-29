@@ -44,7 +44,7 @@ def eval_command(cfgs):
     command = eval_sh_path + ' '\
             + cfgs.data_src_dir + ' '\
             + cfgs.model_cfg_path + ' '\
-            + '{}/evaluate_{}.log'.format(cfgs.log_dir, cfgs.flag) \
+            + '{}/evaluate_{}.log'.format(cfgs.log_dir, cfgs.flag) + ' '\
             + cfgs.extra_tag + ' '\
             + cfgs.model_path + ' '\
             + cfgs.working_dir + ' '\
