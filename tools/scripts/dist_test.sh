@@ -42,6 +42,7 @@
 
 set -x
 NGPUS=$1
-PY_ARGS=${@:2}
+LOG_FILE=$2
+PY_ARGS=${@:3}
 
-python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} test.py --launcher pytorch ${PY_ARGS}
+python3 -m torch.distributed.launch --nproc_per_node=${NGPUS} test.py --launcher pytorch ${PY_ARGS} > $LOG_FILE 2>&1
