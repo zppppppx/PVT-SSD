@@ -19,4 +19,4 @@ bash ./scripts/dist_test.sh ${NUM_GPU} ${LOG_FILE} \
     --ckpt ${MODEL_PTH_PATH} \
     --extra_tag ${EXTRA_TAG} \
 
-../data/waymo/compute_detection_metrics_main ../output/cfgs/waymo_models/${EXTRA_TAG}/eval/epoch_no_number/val/default/final_results/data/detection_pred.bin ../data/waymo/gt.bin >> ${LOG_FILE} 2>&1
+../data/waymo/compute_detection_metrics_main ../output/cfgs/waymo_models/pvt-ssd/${EXTRA_TAG}/eval/epoch_no_number/val/default/final_result/data/detection_pred.bin ../data/waymo/gt.bin >> ${LOG_FILE} 2>&1
