@@ -51,6 +51,11 @@ def eval_command(cfgs):
             + str(cfgs.batch_size) + ' '
             
     os.system(command)
+    
+    log_file = '{}/evaluate_{}.log'.format(cfgs.log_dir, cfgs.flag)
+    os.makedirs(cfgs.AP_files_dir, exist_ok=True)
+    precision_pkl = os.path.join(cfgs.AP_files_dir, 'precision.pkl')
+    wu.aggregate_data(log_file, precision_pkl)
 
 # def train(cfgs):
 #     relative_model_path = cfgs.model_cfg_path.split('/')[-3:]
