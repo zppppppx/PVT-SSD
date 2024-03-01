@@ -39,6 +39,8 @@ def parse_config():
 def eval_command(cfgs):
     eval_sh_path = os.path.join(cfgs.pvt_dir, 'tools/my_new_scripts/eval.sh')
     os.makedirs(cfgs.log_dir, exist_ok=True)
+    log_file = '{}/evaluate_{}.log 2>&1'.format(cfgs.log_dir, cfgs.flag)
+    
     command = eval_sh_path + ' '\
             + cfgs.data_src_dir + ' '\
             + cfgs.non_detected_obj_dir + ' '\
@@ -49,7 +51,7 @@ def eval_command(cfgs):
             + cfgs.model_path + ' '\
             + cfgs.working_dir + ' '\
             + str(cfgs.batch_size) + ' '\
-            + '> {}/evaluate_{}.log 2>&1'.format(cfgs.log_dir, cfgs.flag)
+            + log_file
             
     os.system(command)
 

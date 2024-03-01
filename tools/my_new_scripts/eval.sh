@@ -7,6 +7,7 @@ EXTRA_TAG=${6}
 MODEL_PTH_PATH=${7}
 WORKING_DIR=${8}
 batch_size=${9}
+LOG_FILE=${10}
 NUM_GPU=$(nvidia-smi --query-gpu=name --format=csv,noheader | wc -l)
 
 cd ${WORKING_DIR}
@@ -19,7 +20,7 @@ mkdir -p ${AP_files_dir}
 rm ../data/kitti/training/velodyne
 ln -s ${DATA_SRC} ../data/kitti/training/velodyne
 
-bash ./scripts/dist_test.sh ${NUM_GPU} \
+bash ./scripts/dist_test.sh ${NUM_GPU} ${LOG_FILE} \
     --cfg_file ${MODEL_CFG_PATH} \
     --batch_size ${batch_size} \
     --ckpt ${MODEL_PTH_PATH} \
